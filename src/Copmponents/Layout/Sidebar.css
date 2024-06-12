@@ -1,0 +1,44 @@
+.sidebar{
+    display: flex;
+    flex-direction: column;
+    background: #523CA2;
+    width:auto;
+    height: 100vh;
+    padding: 10px;
+    color:#ffffff;
+    margin-top:-10px;
+    white-space: nowrap;
+  }
+  .sidebar-parent{
+    display: flex;
+    flex-direction: column;
+    gap:2px;
+  }
+  .sidebar-child{
+    display: flex;
+    flex-direction: row;
+    gap:10px;
+    padding:10px;
+    text-decoration: none;
+    color: #ffffff;
+    cursor: pointer;
+  }
+  
+  .sidebar-child:hover{
+    color: #CEEA49;
+  }
+  
+  .ham-icon{
+    display: flex;
+    justify-content: end;
+    padding-right:9px;
+    padding-bottom:10px;
+    color:#CEEA49;
+  }
+  
+  .sidebar-submenu{
+    padding-left: 20px;
+  }
+  .sidebar-child.active{
+    color:#CEEA49;
+  }
