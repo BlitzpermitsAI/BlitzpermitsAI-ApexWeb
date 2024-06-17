@@ -1,0 +1,85 @@
+.project-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    margin-top:40px;
+}
+
+.table-container {
+    overflow-x:scroll;
+  }
+ 
+.project-table thead tr {
+    background-color: #583CA8;
+    color: white;
+    text-align: left;
+    font-size: clamp(1rem, 1.5vw, 1.2rem);
+ 
+}
+.project-table th{
+    color:#fff;
+    font-weight: 400;
+}
+.project-table td{
+    color:#343A40;
+}
+
+.project-table th,
+.project-table td {
+    padding: 15px 15px;
+    white-space: nowrap;
+}
+ 
+.project-table tbody tr:nth-child(even) {
+    background: rgba(206, 234, 74, 0.14);
+}
+ 
+.project-table tbody tr:nth-child(odd) {
+    background: inherit;
+}
+
+.Center-item{
+    display: flex;
+    justify-content: center;
+}
+
+@media(max-width:768px){
+    .project-table th, .project-table td {
+        padding: 5px 6px;
+        white-space: nowrap;
+    }
+}
+
+@media(min-width:769px) and (max-width:820px){
+    .table-container {
+        width: 420px;
+    }
+}
+
+@media(min-width:820px) and (max-width:900px){
+    .table-container {
+        width: 480px;
+    }
+}
+@media(min-width:900px) and (max-width:1000px){
+    .table-container {
+        width: 560px;
+    }
+}
+@media(min-width:1000px) and (max-width:1100px){
+    .table-container {
+        width: 660px;
+    }
+}
+
+@media(min-width:1100px) and (max-width:1200px){
+    .table-container {
+        width: 760px;
+    }
+}
+
+@media(min-width:1200px) and (max-width:1300px){
+    .table-container {
+        width: 850px;
+    }
+}

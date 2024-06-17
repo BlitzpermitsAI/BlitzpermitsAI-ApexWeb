@@ -1,18 +1,20 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "./Components/Page/Home";
-import './App.css';
-import Compliance from './Components/Page/Compliance.js'
+import Home from "./Copmponents/Page/Home";
+
+
 
 function App() {
 
  
   return (
     <Router>
-    <Routes>
+   <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/compliance" element={<Compliance />} />
+         
+        
         </Routes>
+    
     </Router>
   );
 }
