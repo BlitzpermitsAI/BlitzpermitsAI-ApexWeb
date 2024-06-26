@@ -1,6 +1,7 @@
 import http from '../Api/Header';
-export const login=(data)=>{
-    return http.post("api/authentication/login-2FA", data);
+export const UploadPDF=(data)=>{
+    
+    return http.post("/process_file", data);
 }
 
 

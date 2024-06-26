@@ -11,6 +11,7 @@ import Profile from '../../Assets/images/profile.png';
 import Table from '../Layout/Table';
 import HamOpen from '../../Assets/images/ham-open.svg';
 
+
 function Compliance() {
 
 
@@ -19,13 +20,15 @@ function Compliance() {
     month: 'long',
     day: 'numeric'
   });
-  const [currentPage, setCurrentPage] = useState('Project Information');
 
-  const [isSidebarOpen, setSidebarOpen] = useState(false);
+const [currentPage, setCurrentPage] = useState('Project Information');
+const [isSidebarOpen, setSidebarOpen] = useState(false);
 
   // Function to toggle sidebar visibility
   const toggleSidebar = () => {
+
     setSidebarOpen(!isSidebarOpen);
+    
   };
 
 
@@ -67,7 +70,7 @@ function Compliance() {
     <p className='date-div' style={{color: '#ffffff'}}>{currentDate}</p>
     <h1 className='heading-1 mg-top'>Compliance Report Generation</h1>
     </div>
-    <Table data="Ganesh" />
+    <Table/>
 </div>
 
   </div>

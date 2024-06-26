@@ -1,8 +1,39 @@
 import React from "react";
 import Download from '../../Assets/images/download.svg'
 import './Table.css'
-function Table(props) {
-    console.log(props,"propspropspropsprops");
+
+function Table() {
+
+    const handleDownloadFile = (e) => {
+        // alert("download file");
+       // const data="hello";
+            const data ="data";
+             const base64Pdf = `data:application/pdf;base64,${data}`; // Your Base64 string here
+    
+            // Convert Base64 to binary
+            const byteCharacters = atob(base64Pdf.split(",")[1]);
+            const byteNumbers = new Array(byteCharacters.length);
+            for (let i = 0; i < byteCharacters.length; i++) {
+              byteNumbers[i] = byteCharacters.charCodeAt(i);
+            }
+            const byteArray = new Uint8Array(byteNumbers);
+    
+            // Create Blob from binary data
+            const blob = new Blob([byteArray], { type: "application/pdf" });
+    
+            // Create a temporary anchor element
+            const tempAnchor = document.createElement("a");
+            tempAnchor.href = window.URL.createObjectURL(blob);
+            tempAnchor.download = "report_document.pdf"; // Name of the downloaded file
+    
+            // Programmatically click the anchor element to trigger the download
+            tempAnchor.click();
+    
+            // Clean up
+            window.URL.revokeObjectURL(tempAnchor.href);
+      };
+
+
   return(
  
 <div className="table-container">
@@ -24,7 +55,7 @@ function Table(props) {
                 <td>Section correctness</td>
                 <td>June 7, 2024, 2:04 PM</td>
                 <td>0 Minutes 25 Seconds</td>
-                <td className="Center-item"><a href="#"><img src={Download} alt="Download Report" className="icon"/></a></td>
+                <td className="Center-item"><a href="#"><img src={Download} alt="Download Report" className="icon" onClick={handleDownloadFile}/></a></td>
             </tr>
             <tr>
                 <td>2</td>

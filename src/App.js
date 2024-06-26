@@ -5,17 +5,16 @@ import './App.css';
 import Compliance from './Components/Page/Compliance.js'
 
 function App() {
-
- 
   return (
+
     <Router>
     <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/compliance" element={<Compliance />} />
         </Routes>
     </Router>
+
   );
 }
 
 export default App;
-
