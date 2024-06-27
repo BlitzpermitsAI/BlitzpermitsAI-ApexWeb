@@ -89,7 +89,7 @@ return (
     <>
     <div className='upload-main-sec'>
     <div className='upload-sec-child'>
-      <h1 className='heading-1'>Please upload CAD PDF</h1>
+      <h1 className='heading-1'>Please upload PDF file.</h1>
     <div>
       <form>
       <input
