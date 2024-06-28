@@ -51,7 +51,7 @@ const [isSidebarOpen, setSidebarOpen] = useState(false);
     <div className='sec-header-row'>
     <Link to='' className='profile-div'>
       <img src={Profile} className='profile-img' />
-      <p className='profile-name' style={{ color: '#ffffff' }}>Alex Smith</p>
+      <p className='profile-name' style={{ color: '#ffffff' }}>Taylor Blitz</p>
     </Link>
 
     <div className='header-icon-div'>

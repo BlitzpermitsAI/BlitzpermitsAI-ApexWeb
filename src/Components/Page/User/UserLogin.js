@@ -5,7 +5,7 @@ import { login } from "../../../Storage/Redux/loginSlice";
 
 
 import { getUserInfo } from "../../../Storage/Redux/projectSlice";*/
-import {LoginAPI} from '../../../Common/Api/LoginService';
+import {LoginAPI, UserDetailsAPI} from '../../../Common/Api/LoginService';
 import { Link, useNavigate } from "react-router-dom";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { faEyeSlash } from "@fortawesome/free-solid-svg-icons";
@@ -64,8 +64,31 @@ const UserLogin = () => {
     setShowLoader(true);
 
     try {
-        LoginAPI(loginData).then((response)=>{
+        LoginAPI(loginData).then(async (response)=>{
           console.log(response);
+
+          
+          if (response?.status == "200" || response?.status == "OK") {
+            localStorage.setItem("userEmail", response?.data?.email);
+
+            if (response?.data?.message === "Token created") {
+              localStorage.setItem(
+                "userTokenInfo",
+                JSON.stringify(response?.data?.response)
+              );
+              await UserDetailsAPI(response?.data?.response?.userId)
+                .then((userdata) => {
+                  
+                  localStorage.setItem("userEmail", userdata?.data?.email);
+                  localStorage.setItem("UserInfo", JSON.stringify(userdata?.data));
+                  
+                  navigate('/Home')
+                  window.location.reload();
+                });
+            }
+
+
+          }
           setShowLoader(false)
           navigate('/Home')
       })

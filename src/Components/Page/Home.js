@@ -25,6 +25,12 @@ function Home() {
     setSidebarOpen(!isSidebarOpen);
   };
 
+  
+  const userDataInfo = localStorage.getItem("UserInfo");
+  const userDetails = JSON.parse(userDataInfo);
+  const capitalizeFirstLetter=(Name)=>  {return Name.charAt(0).toUpperCase() + Name.slice(1);
+  }
+
   return (
     <>
       <div className="sidebar-right-sec-home">
@@ -46,7 +52,9 @@ function Home() {
               <Link to="" className="profile-div">
                 <img src={Profile} className="profile-img" alt="profile" />
                 <p className="profile-name" style={{ color: '#000000' }}>
-                  Alex Smith
+                {userDetails !== null
+                    ?capitalizeFirstLetter(userDetails?.firstName) + " " + capitalizeFirstLetter(userDetails?.surname)
+                    : "Taylor Blitz"}
                 </p>
               </Link>
 
