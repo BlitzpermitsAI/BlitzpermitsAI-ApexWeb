@@ -10,7 +10,7 @@ import Notification from '../../Assets/images/notification-white.svg'
 import Profile from '../../Assets/images/profile.png';
 import Table from '../Layout/Table';
 import HamOpen from '../../Assets/images/ham-open.svg';
-
+import Helper from '../../Common/Utils/Helpers';
 
 function Compliance() {
 
@@ -31,6 +31,8 @@ const [isSidebarOpen, setSidebarOpen] = useState(false);
     
   };
 
+  const userDataInfo = localStorage.getItem("UserInfo");
+  const userDetails = JSON.parse(userDataInfo);
 
   return(
     <>
@@ -51,7 +53,9 @@ const [isSidebarOpen, setSidebarOpen] = useState(false);
     <div className='sec-header-row'>
     <Link to='' className='profile-div'>
       <img src={Profile} className='profile-img' />
-      <p className='profile-name' style={{ color: '#ffffff' }}>Taylor Blitz</p>
+      <p className='profile-name' style={{ color: '#ffffff' }}>{userDetails !== null
+                    ?Helper.capitalizeFirstLetter(userDetails?.firstName) + " " + Helper.capitalizeFirstLetter(userDetails?.surname)
+                    : "Taylor Blitz"}</p>
     </Link>
 
     <div className='header-icon-div'>

@@ -9,6 +9,7 @@ import Logout from '../../Assets/images/logout.svg';
 import Notification from '../../Assets/images/notification.svg';
 import Profile from '../../Assets/images/profile.png';
 import HamOpen from '../../Assets/images/ham-open.svg';
+import Helper from '../../Common/Utils/Helpers';
 
 function Home() {
   const currentDate = new Date().toLocaleDateString('en-US', {
@@ -28,8 +29,7 @@ function Home() {
   
   const userDataInfo = localStorage.getItem("UserInfo");
   const userDetails = JSON.parse(userDataInfo);
-  const capitalizeFirstLetter=(Name)=>  {return Name.charAt(0).toUpperCase() + Name.slice(1);
-  }
+  
 
   return (
     <>
@@ -53,7 +53,7 @@ function Home() {
                 <img src={Profile} className="profile-img" alt="profile" />
                 <p className="profile-name" style={{ color: '#000000' }}>
                 {userDetails !== null
-                    ?capitalizeFirstLetter(userDetails?.firstName) + " " + capitalizeFirstLetter(userDetails?.surname)
+                    ?Helper.capitalizeFirstLetter(userDetails?.firstName) + " " + Helper.capitalizeFirstLetter(userDetails?.surname)
                     : "Taylor Blitz"}
                 </p>
               </Link>
