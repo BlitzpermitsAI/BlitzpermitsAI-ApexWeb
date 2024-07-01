@@ -70,7 +70,7 @@ const VerifyCode = () => {
         console.log(response?.response?.isSuccess,"response");
         if (response?.status == "200" || response?.status == "OK") {
           setShowLoader(false);
-          navigate("/Home");
+         // navigate("/Home");
         }
         else{
             setErrorMsg("InValid Code !")

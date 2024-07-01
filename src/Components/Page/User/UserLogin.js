@@ -1,11 +1,5 @@
 import { React, useEffect, useState } from "react";
-//import { useDispatch } from "react-redux";
-/*
-import { login } from "../../../Storage/Redux/loginSlice";
-
-
-import { getUserInfo } from "../../../Storage/Redux/projectSlice";*/
-import {LoginAPI, UserDetailsAPI} from '../../../Common/Api/LoginService';
+import { LoginAPI, UserDetailsAPI } from "../../../Common/Api/LoginService";
 import { Link, useNavigate } from "react-router-dom";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { faEyeSlash } from "@fortawesome/free-solid-svg-icons";
@@ -16,7 +10,6 @@ import * as Yup from "yup";
 import "./UserLogin.css";
 
 const UserLogin = () => {
-  //const dispatch = useDispatch();
   let navigate = useNavigate();
 
   const [showLoader, setShowLoader] = useState(false);
@@ -64,44 +57,45 @@ const UserLogin = () => {
     setShowLoader(true);
 
     try {
-        LoginAPI(loginData).then(async (response)=>{
-          console.log(response);
-
-          
-          if (response?.status == "200" || response?.status == "OK") {
-            localStorage.setItem("userEmail", response?.data?.email);
-
-            if (response?.data?.message === "Token created") {
-              localStorage.setItem(
-                "userTokenInfo",
-                JSON.stringify(response?.data?.response)
-              );
-              await UserDetailsAPI(response?.data?.response?.userId)
-                .then((userdata) => {
-                  
-                  localStorage.setItem("userEmail", userdata?.data?.email);
-                  localStorage.setItem("UserInfo", JSON.stringify(userdata?.data));
-                  
-                  navigate('/Home')
-                  window.location.reload();
-                });
-            }
-
-
+      LoginAPI(loginData).then(async (response) => {
+        if (response?.status == "200" || response?.status == "OK") {
+          if (response?.data?.message === "Token created") {
+            setShowLoader(false);
+            localStorage.setItem(
+              "userTokenInfo",
+              JSON.stringify(response?.data?.response)
+            );
+            await UserDetailsAPI(response?.data?.response?.userId).then(
+              (userdata) => {
+                localStorage.setItem("userEmail", userdata?.data?.email);
+                localStorage.setItem(
+                  "UserInfo",
+                  JSON.stringify(userdata?.data)
+                );
+                const NavPage =
+                  userdata?.userType === "admin"
+                    ? "/Home"
+                    : "/Home";
+                navigate(NavPage);
+               // navigate("/Home");
+              }
+            );
           }
-          setShowLoader(false)
-          navigate('/Home')
-      })
-      }
-      catch(error) {
-        alert(false)
-        
-      } 
-      console.error('Error uploading file:');
-
-    setShowLoader(false);
-};
-    /*
+        } else if (response?.data?.responseObject === null) {
+          navigate("/verify-code");
+        } else if (response?.response?.data?.status == 401) {
+          setShowLoader(false);
+          setErrorMsg("Invalid Credentials, Please Retry !!");
+        }
+        else { navigate("/reset-password", { state: response?.data });}
+      });
+    } catch (error) {
+      setShowLoader(false);
+      console.log("error",error);
+    }
+    
+  };
+  /*
     dispatch(login(loginData))
       .unwrap()
       .then((data) => {
@@ -147,8 +141,6 @@ const UserLogin = () => {
       });
       */
 
-  
-
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -171,7 +163,8 @@ const UserLogin = () => {
         <div className="rightcontainer">
           <form onSubmit={handleSubmitLogin}>
             <div className="bz-logo"> </div>
-            <div className="signIn-title"> </div><br />
+            <div className="signIn-title"> </div>
+            <br />
             <div className="field-set">
               <div className="field-container">
                 <label className="required">Email </label>
@@ -207,10 +200,10 @@ const UserLogin = () => {
                   //   onClick={(e) => handleShowPassword(e, true)}
                   // ></button>
                   <FontAwesomeIcon
-                  icon={faEye}
-                  className="btn-cancel"
-                  onClick={(e) => handleShowPassword(e, true)}
-                />
+                    icon={faEye}
+                    className="btn-cancel"
+                    onClick={(e) => handleShowPassword(e, true)}
+                  />
                 ) : (
                   <FontAwesomeIcon
                     className="btn-cancel"

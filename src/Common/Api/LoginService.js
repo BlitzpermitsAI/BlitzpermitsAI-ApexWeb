@@ -1,12 +1,30 @@
 import http from "../Api/HeaderCommon";
-export const LoginAPI = (data) => {
-  return http.post("/authentication/login", data);
+export const LoginAPI = async (data) => {
+  try {
+    const response = await http.post("/authentication/login", data);
+    return response;
+  } catch (err) {
+    console.log("error", err);
+    return err;
+  }
 };
 
 export const UserDetailsAPI = async (userId) => {
-  return http.get("/user/" + userId);
+  try {
+    const response = await http.get("/user/" + userId);
+    return response;
+  } catch (err) {
+    console.log("error+", err);
+    return err;
+  }
 };
 
-export const VerifyCodeApi = (data) => {
-  return http.post("/authentication/login-2FA", data);
+export const VerifyCodeApi = async (data) => {
+  try {
+    const response = await http.post("/authentication/login-2FA", data);
+    return response;
+  } catch (err) {
+    console.log("error", err);
+    return err;
+  }
 };
