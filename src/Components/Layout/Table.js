@@ -2,7 +2,38 @@ import React from "react";
 import Download from '../../Assets/images/download.svg'
 import './Table.css'
 
-function Table() {
+function Table({Projectsdata}) {
+    
+    // const formatDate = (dateString) =>{
+    //     try{
+    //         return dateString.toLocaleDateString('en-US');
+    //     } catch (error) {
+    //         console.log("error",error);
+    //       }
+    //       return dateString;
+
+    // };
+    // const updatedProjects = Projectsdata.map((project) => {
+        
+    //     return {...project,  timeStamp:formatDate(formatDate)};
+    //    });
+    // const updatedProjects = Projectsdata.map((project) => {
+    //     if (project.projectId === 1) {  
+    //       return { ...project,county_id: 36 };  
+    //     };
+
+    //     if (project.projectId === 2) {  
+    //         return { ...project,county_id: 14 };  
+    //       };
+
+    //       if (project.projectId === 3) {  
+    //         return { ...project,county_id: 25 };  
+    //       };
+
+
+    //     return project; // Keep other projects unchanged
+    //   });
+
 
     const handleDownloadFile = (e) => {
         // alert("download file");
@@ -33,6 +64,9 @@ function Table() {
             window.URL.revokeObjectURL(tempAnchor.href);
       };
 
+      if (!Projectsdata) {
+        return <div>Loading...</div>;
+      }
 
   return(
  
@@ -49,55 +83,18 @@ function Table() {
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>1</td>
-                <td>BlitzPermits#123</td>
-                <td>Section correctness</td>
-                <td>June 7, 2024, 2:04 PM</td>
-                <td>0 Minutes 25 Seconds</td>
-                <td className="Center-item"><a href="#"><img src={Download} alt="Download Report" className="icon" onClick={handleDownloadFile}/></a></td>
+        {Projectsdata.map((project) => (
+            <tr key={project.projectId}>
+                <td>{project.projectId}</td>
+                <td>BlitzPermits {project.projectId}</td>
+                <td>{project.siteAddress}</td>
+                <td>{project.timeStamp}</td>
+                <td>25 Seconds</td>
+                <td className="Center-item"><a href="#"><img src={Download} alt="Download Report" className="icon" onClick={handleDownloadFile} /></a></td>
             </tr>
-            <tr>
-                <td>2</td>
-                <td>BlitzPermits#124</td>
-                <td>Substitution note</td>
-                <td>June 7, 2024, 2:04 PM</td>
-                <td>0 Minutes 25 Seconds</td>
-                <td className="Center-item"><a href="#"><img src={Download} alt="Download Report" className="icon"/></a></td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>BlitzPermits#125</td>
-                <td>Multiple trunk trees</td>
-                <td>June 7, 2024, 2:04 PM</td>
-                <td>0 Minutes 25 Seconds</td>
-                <td className="Center-item"><a href="#"><img src={Download} alt="Download Report" className="icon"/></a></td>
-            </tr>
-            <tr>
-                <td>4</td>
-                <td>BlitzPermits#126</td>
-                <td>Township management</td>
-                <td>June 7, 2024, 2:04 PM</td>
-                <td>0 Minutes 25 Seconds</td>
-                <td className="Center-item"><a href="#"><img src={Download} alt="Download Report" className="icon"/></a></td>
-            </tr>
-            <tr>
-                <td>5</td>
-                <td>BlitzPermits#127</td>
-                <td>Range completeness</td>
-                <td>June 7, 2024, 2:04 PM</td>
-                <td>0 Minutes 25 Seconds</td>
-                <td className="Center-item"><a href="#"><img src={Download} alt="Download Report" className="icon"/></a></td>
-            </tr>
-            <tr>
-                <td>6</td>
-                <td>BlitzPermits#128</td>
-                <td>Township management</td>
-                <td>June 7, 2024, 2:04 PM</td>
-                <td>0 Minutes 25 Seconds</td>
-                <td className="Center-item"><a href="#"><img src={Download} alt="Download Report" className="icon"/></a></td>
-            </tr>
+             ))}
         </tbody>
+   
     </table>
     </div>
   )

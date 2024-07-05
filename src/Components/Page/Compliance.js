@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {Link} from 'react-router-dom';
 import './Home.css';
 import Sidebar from '../Layout/Sidebar';
@@ -11,9 +11,31 @@ import Profile from '../../Assets/images/profile.png';
 import Table from '../Layout/Table';
 import HamOpen from '../../Assets/images/ham-open.svg';
 import Helper from '../../Common/Utils/Helpers';
+import {ProjectListAPI} from '../../Common/Api/ProjectService'
 
 function Compliance() {
+  const userDataInfo = localStorage.getItem("UserInfo");
+  const userDetails = JSON.parse(userDataInfo);
+  const [allprojectList, setAllprojectList] = useState([]);
 
+  useEffect( () => {
+    const userData = localStorage.getItem("UserInfo");
+    const userInfo = JSON.parse(userData);
+
+
+    try {
+      ProjectListAPI(userDetails?.id).then(
+        (ProjectListData) => {
+          debugger;
+          setAllprojectList(ProjectListData);
+        }
+      );
+    }catch (error) {
+      console.log("error",error);
+    }
+
+    }, []);
+  
 
   const currentDate = new Date().toLocaleDateString('en-US', {
     year: 'numeric',
@@ -31,8 +53,7 @@ const [isSidebarOpen, setSidebarOpen] = useState(false);
     
   };
 
-  const userDataInfo = localStorage.getItem("UserInfo");
-  const userDetails = JSON.parse(userDataInfo);
+ 
 
   return(
     <>
@@ -74,7 +95,7 @@ const [isSidebarOpen, setSidebarOpen] = useState(false);
     <p className='date-div' style={{color: '#ffffff'}}>{currentDate}</p>
     <h1 className='heading-1 mg-top'>Compliance Report Generation</h1>
     </div>
-    <Table/>
+    <Table Projectsdata={allprojectList?.data} />
 </div>
 
   </div>
